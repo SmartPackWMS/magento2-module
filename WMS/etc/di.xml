@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\Console\CommandListInterface">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="smartpack_wms_product_sync" xsi:type="object">SmartPack\WMS\Console\Command\ProductSync</item>
+            </argument>
+        </arguments>
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="smartpack_wms_stock_sync" xsi:type="object">SmartPack\WMS\Console\Command\StockSync</item>
+            </argument>
+        </arguments>
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="smartpack_wms_order_sync" xsi:type="object">SmartPack\WMS\Console\Command\OrderSync</item>
+            </argument>
+        </arguments>
+    </type>
+</config>
