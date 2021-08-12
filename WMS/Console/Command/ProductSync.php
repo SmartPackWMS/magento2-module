@@ -56,7 +56,8 @@ class ProductSync extends Command
         //        print_r($products->getProducts());
 
         $itemProduct = new Items();
-        $productList = json_decode($itemProduct->getList());
+        echo $itemProduct->import();
+        $productList = json_decode($itemProduct->list());
         print_r($productList);
     }
 }
