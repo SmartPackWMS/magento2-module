@@ -7,6 +7,9 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
+use SmartPack\Framework\Product;
+use SmartPack\WMSApi\Items;
+
 /**
  * Class SomeCommand
  */
@@ -48,5 +51,12 @@ class ProductSync extends Command
         $output->writeln('<info>Success Message.</info>');
         $output->writeln('<error>An error encountered.</error>');
         $output->writeln('<comment>Some Comment.</comment>');
+
+        //        $products = new Product();
+        //        print_r($products->getProducts());
+
+        $itemProduct = new Items();
+        $productList = json_decode($itemProduct->getList());
+        print_r($productList);
     }
 }
