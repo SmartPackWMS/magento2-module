@@ -9,3 +9,12 @@ php bin/magento module:enable SmartPack_WMS
 php bin/magento setup:upgrade
 php bin/magento setup:di:compile
 ```
+
+# Sync your products
+First you need to sync your products to SmartPack WMS. Default its go for 50 product each sync loop. Its only sync products there are enabled.
+
+```
+bin/magento smartpack:product:sync
+```
+
+_Supported product types: Simple Product_

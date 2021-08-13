@@ -46,7 +46,8 @@ class ProductSync extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $limit = 1;
+        $limit = 50;
+
         $products = new Product();
         $product_data = $products->getProducts(1, $limit);
         $pages = $product_data->getLastPageNumber();
