@@ -34,6 +34,8 @@ class ProductSync extends Command
         parent::configure();
     }
 
+
+
     /**
      * Execute the command
      *
@@ -44,20 +46,25 @@ class ProductSync extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        if ($name = $input->getOption(self::NAME)) {
-            $output->writeln('<info>Provided name is `' . $name . '`</info>');
+        $limit = 1;
+        $products = new Product();
+        $product_data = $products->getProducts(1, $limit);
+        $pages = $product_data->getLastPageNumber();
+        $page = 1;
+
+        while ($page <= $pages) {
+            $output->writeln('<bg=yellow;options=bold,underscore>Loading page ' . $page . ' of ' . $pages . '</>');
+
+            foreach ($products->getProducts($page, $limit) as $val) {
+                $output->writeln('<info>Import product with sku: ' . $val->getSku() . ' | title: ' . $val->getName() . '</info>');
+                $itemProduct = new Items();
+                $itemProduct->import([
+                    "sku" => $val->getSku(),
+                    "description" => $val->getName(),
+                ]);
+            }
+
+            $page++;
         }
-
-        $output->writeln('<info>Success Message.</info>');
-        $output->writeln('<error>An error encountered.</error>');
-        $output->writeln('<comment>Some Comment.</comment>');
-
-        //        $products = new Product();
-        //        print_r($products->getProducts());
-
-        $itemProduct = new Items();
-        echo $itemProduct->import();
-        $productList = json_decode($itemProduct->list());
-        print_r($productList);
     }
 }

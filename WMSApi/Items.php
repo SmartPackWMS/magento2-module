@@ -14,13 +14,12 @@ class Items extends APIService
         return $data->getBody();
     }
 
-    function import()
+    function import(array $attr)
     {
         $data = $this->client->request('POST', 'item/import', [
-            'body' => json_encode([[
-                "sku" => "test-prod-1",
-                "description" => ".",
-            ]])
+            'body' => json_encode([
+                $attr
+            ])
         ]);
 
         return $data->getBody();
