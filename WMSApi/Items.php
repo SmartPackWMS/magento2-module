@@ -24,4 +24,10 @@ class Items extends APIService
 
         return $data->getBody();
     }
+
+    function get(string $sku)
+    {
+        $data = $this->client->request('GET', 'item/get/' . $sku);
+        return $data->getBody();
+    }
 }
