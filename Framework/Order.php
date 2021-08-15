@@ -27,4 +27,14 @@ class Order
 
         return $collection;
     }
+
+    function changeWmsState(string $state, object $order)
+    {
+        $order->setWmsState($state);
+        $order->setWmsStateUpdatedAt(new \DateTime());
+
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $orderResourceModel = $objectManager->get('\Magento\Sales\Model\ResourceModel\Order');
+        $orderResourceModel->save($order);
+    }
 }
