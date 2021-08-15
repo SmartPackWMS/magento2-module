@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <type name="Magento\Framework\Console\CommandListInterface">
+        <!-- Full data sync -->
         <arguments>
             <argument name="commands" xsi:type="array">
                 <item name="smartpack_wms_product_sync" xsi:type="object">SmartPack\WMS\Console\Command\ProductSync</item>

@@ -7,6 +7,8 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
+use SmartPack\Framework\Order;
+
 /**
  * Class SomeCommand
  */
@@ -18,7 +20,7 @@ class OrderSync extends Command
     protected function configure()
     {
         $this->setName('smartpack:order:sync');
-        $this->setDescription('This is my first console command.');
+        $this->setDescription('Sync all orders to SmartPack WMS');
 
         parent::configure();
     }
@@ -34,5 +36,13 @@ class OrderSync extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $output->writeln('<info>Success Message.</info>');
+
+        $orders = new Order();
+
+        foreach ($orders->getOrders() as $order) {
+            echo "OrderID: " . $order->getId() . "\n";
+            echo "Status: " . $order->getStatus() . "\n";
+            echo "State: " . $order->getState() . "\n";
+        }
     }
 }
