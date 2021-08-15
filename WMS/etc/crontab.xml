@@ -2,7 +2,7 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
     <group id="index">
         <job name="migrate_order_to_smartpack" instance="SmartPack\WMS\Cron\MigrateOrder" method="execute">
-            <schedule>*/5 * * * *</schedule>
+            <schedule>* * * * *</schedule>
         </job>
     </group>
     <group id="index">
