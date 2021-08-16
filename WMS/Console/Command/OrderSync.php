@@ -48,7 +48,10 @@ class OrderSync extends Command
             $order_lines = [];
             $orderItems = $order->getAllItems();
             foreach ($orderItems as $item) {
-                $order_lines[$item->getSku()] = (int) $item->getQtyOrdered();
+                $order_lines[] = [
+                    'qty' => (int) $item->getQtyOrdered(),
+                    'sku' => $item->getSku()
+                ];
             }
 
             $shipment_address = $order->getShippingAddress()->getData();
