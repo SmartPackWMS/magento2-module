@@ -63,6 +63,10 @@ class ProductSync extends Command
                     "sku" => $val->getSku(),
                     "description" => $val->getName(),
                 ]);
+
+                $products->updateEntity('catalog_product_entity', [
+                    "wms_state" => 'synced'
+                ], ['entity_id = ?' => (int)$val->getId()]);
             }
 
             $page++;
