@@ -3,6 +3,7 @@
     <default>
         <smartpack_wms>
             <wms_api>
+                <wms_api_url>https://smartpack.dk/api/v1/</wms_api_url>
                 <wms_api_username></wms_api_username>
                 <wms_api_password></wms_api_password>
             </wms_api>

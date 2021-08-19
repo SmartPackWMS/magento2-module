@@ -13,13 +13,17 @@
 
             <group id="wms_api" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
                 <label>WMS API Configuration</label>
+                <field id="wms_api_url" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>WMS API URL</label>
+                    <comment></comment>
+                </field>
                 <field id="wms_api_username" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>Username</label>
-                    <comment>This text will display on the frontend.</comment>
+                    <comment></comment>
                 </field>
                 <field id="wms_api_password" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>Password</label>
-                    <comment>This text will display on the frontend.</comment>
+                    <comment></comment>
                 </field>
             </group>
         </section>

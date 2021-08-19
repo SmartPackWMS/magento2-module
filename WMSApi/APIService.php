@@ -6,21 +6,24 @@ use GuzzleHttp\Client;
 
 abstract class APIService
 {
-    const API_REQUEST_URI = 'https://smartpack.dk/api/v1/';
-
     protected $client = null;
-    private $username = '';
-    private $password = '';
 
     public function __construct()
     {
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $scopeConfig = $objectManager->get('\Magento\Framework\App\Config\ScopeConfigInterface');
+        $storeScope = \Magento\Store\Model\ScopeInterface::SCOPE_STORES;
+
         $this->client = new Client([
-            'base_uri' => self::API_REQUEST_URI,
+            'base_uri' => $scopeConfig->getValue("smartpack_wms/wms_api/wms_api_url", $storeScope) ?? 'https://smartpack.dk/api/v1/',
             'timeout'  => 2.0,
-            'headers' => ['Content-Type' => 'application/json'],
+            'headers' => [
+                'Content-Type' => 'application/json',
+                'Accept' => 'application/json'
+            ],
             'auth' => [
-                $this->username,
-                $this->password
+                $scopeConfig->getValue("smartpack_wms/wms_api/wms_api_username", $storeScope),
+                $scopeConfig->getValue("smartpack_wms/wms_api/wms_api_password", $storeScope)
             ]
         ]);
     }
