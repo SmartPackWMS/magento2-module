@@ -10,6 +10,12 @@ php bin/magento setup:upgrade
 php bin/magento setup:di:compile
 ```
 
+When you have enabled the module you need to config settings between SmartPack WMS API to your Magento2 webshop.
+
+```
+Stores > Configuration > SmartPack > WMS API Configuration
+```
+
 # Sync your products
 First you need to sync your products to SmartPack WMS. Default its go for 50 product each sync loop. Its only sync products there are enabled.
 

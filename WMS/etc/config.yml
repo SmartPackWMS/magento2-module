@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <smartpack_wms>
+            <wms_api>
+                <wms_api_username></wms_api_username>
+                <wms_api_password></wms_api_password>
+            </wms_api>
+        </smartpack_wms>
+    </default>
+</config>
