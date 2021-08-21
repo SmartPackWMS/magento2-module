@@ -7,6 +7,15 @@
                 <wms_api_username></wms_api_username>
                 <wms_api_password></wms_api_password>
             </wms_api>
+            <wms_store_data>
+                <wms_store_data_name></wms_store_data_name>
+                <wms_store_data_street1></wms_store_data_street1>
+                <wms_store_data_zipcode></wms_store_data_zipcode>
+                <wms_store_data_city></wms_store_data_city>
+                <wms_store_data_country>DK</wms_store_data_country>
+                <wms_store_data_phone></wms_store_data_phone>
+                <wms_store_data_email></wms_store_data_email>
+            </wms_store_data>
         </smartpack_wms>
     </default>
 </config>

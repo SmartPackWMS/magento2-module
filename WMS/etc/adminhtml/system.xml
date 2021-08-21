@@ -26,6 +26,38 @@
                     <comment></comment>
                 </field>
             </group>
+
+            <group id="wms_store_data" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>WMS Store Infomartion</label>
+                <field id="wms_store_data_name" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Name</label>
+                    <comment></comment>
+                </field>
+                <field id="wms_store_data_street1" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Street1</label>
+                    <comment></comment>
+                </field>
+                <field id="wms_store_data_zipcode" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Zipcode</label>
+                    <comment></comment>
+                </field>
+                <field id="wms_store_data_city" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>City</label>
+                    <comment></comment>
+                </field>
+                <field id="wms_store_data_country" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Country</label>
+                    <comment></comment>
+                </field>
+                <field id="wms_store_data_phone" translate="label" type="text" sortOrder="6" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Phone</label>
+                    <comment></comment>
+                </field>
+                <field id="wms_store_data_email" translate="label" type="text" sortOrder="7" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Email</label>
+                    <comment></comment>
+                </field>
+            </group>
         </section>
     </system>
 </config>

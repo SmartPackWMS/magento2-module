@@ -9,6 +9,10 @@ class MigrateOrder
 {
     public function execute()
     {
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $scopeConfig = $objectManager->get('\Magento\Framework\App\Config\ScopeConfigInterface');
+        $storeScope = \Magento\Store\Model\ScopeInterface::SCOPE_STORES;
+
         $orders = new Order();
 
         foreach ($orders->getOrders() as $order) {
@@ -35,13 +39,13 @@ class MigrateOrder
                 'description' => '',
                 'printDeliveryNote' => true,
                 'sender' => [
-                    'name' => 'Warehouse ABC',
-                    'street1' => 'Address 23',
-                    'zipcode' => '5432',
-                    'city' => 'Treeville',
-                    'country' => 'DK',
-                    'phone' => '+4588888888',
-                    'email' => 'contact@company.com',
+                    'name' => $scopeConfig->getValue("smartpack_wms/wms_store_data/wms_store_data_name", $storeScope),
+                    'street1' => $scopeConfig->getValue("smartpack_wms/wms_store_data/wms_store_data_street1", $storeScope),
+                    'zipcode' => $scopeConfig->getValue("smartpack_wms/wms_store_data/wms_store_data_zipcode", $storeScope),
+                    'city' => $scopeConfig->getValue("smartpack_wms/wms_store_data/wms_store_data_city", $storeScope),
+                    'country' => $scopeConfig->getValue("smartpack_wms/wms_store_data/wms_store_data_country", $storeScope),
+                    'phone' => $scopeConfig->getValue("smartpack_wms/wms_store_data/wms_store_data_phone", $storeScope),
+                    'email' => $scopeConfig->getValue("smartpack_wms/wms_store_data/wms_store_data_email", $storeScope),
                 ],
                 'recipient' => [
                     'name' => $shipment_address['firstname'] . ' ' . $shipment_address['middlename'] . ' ' . $shipment_address['lastname'],

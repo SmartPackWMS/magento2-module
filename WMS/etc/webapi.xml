@@ -3,7 +3,8 @@
 	<route url="/V1/smartpack/wms/stock-hook" method="POST">
 		<service class="SmartPack\WMS\Api\StockChangedInterface" method="productStockChanged"/>
 		<resources>
-			<resource ref="anonymous"/>
+            <resource ref="anonymous"/>
+			<!-- <resource ref="SmartPack_WMS::StockHook" /> -->
 		</resources>
 	</route>
 </routes>

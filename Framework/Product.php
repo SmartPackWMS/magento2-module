@@ -13,7 +13,10 @@ class Product
     function getProducts(int $current_page = 1, int $page_size = 50)
     {
         $products = $this->productCollection->create()
-            ->addAttributeToSelect('*')
+            ->addFieldToSelect('*')
+            // ->addFieldToFilter('wms_state', [
+            //     'nin' => ['synced']
+            // ])
             ->addAttributeToFilter([
                 [
                     'attribute' => 'status',
