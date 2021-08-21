@@ -57,16 +57,20 @@ class ProductSync extends Command
             $output->writeln('<bg=yellow;options=bold,underscore>Loading page ' . $page . ' of ' . $pages . '</>');
 
             foreach ($products->getProducts($page, $limit) as $val) {
-                $output->writeln('<info>Import product with sku: ' . $val->getSku() . ' | title: ' . $val->getName() . '</info>');
-                $itemProduct = new Items();
-                $itemProduct->import([
-                    "sku" => $val->getSku(),
-                    "description" => $val->getName(),
-                ]);
+                if ($val->getWmsState() !== 'synced') {
+                    $output->writeln('<info>Import product with sku: ' . $val->getSku() . ' | title: ' . $val->getName() . '</info>');
+                    $itemProduct = new Items();
+                    $itemProduct->import([
+                        "sku" => $val->getSku(),
+                        "description" => $val->getName(),
+                    ]);
 
-                $products->updateEntity('catalog_product_entity', [
-                    "wms_state" => 'synced'
-                ], ['entity_id = ?' => (int)$val->getId()]);
+                    $products->updateEntity('catalog_product_entity', [
+                        "wms_state" => 'synced'
+                    ], ['entity_id = ?' => (int)$val->getId()]);
+                } else {
+                    $output->writeln('<bg=yellow>No product changes ||| with sku: ' . $val->getSku() . ' | title: ' . $val->getName() . '</>');
+                }
             }
 
             $page++;
