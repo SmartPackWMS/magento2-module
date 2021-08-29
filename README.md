@@ -1,5 +1,9 @@
 # magento2-module
 
+**System requirement to support this module:**
+
+Magento2 - 2.4.x with PHP7.4
+
 # How to use the module
 You need to clone it into the app/code/ folder for your Magento project, when its clone inside you need to check and enable it.
 
