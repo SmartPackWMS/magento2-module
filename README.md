@@ -36,3 +36,15 @@ Sync sales order if its marked ready for shipment.
 bin/magento smartpack:order:sync
 ```
 
+
+## Module Featuers
+SmartPack have many functions, this module will support following integrations between Magento2 and SmartPack systems
+
+**WMS**
+- Product
+    - CLI: Full sync of products from shop to WMS integration
+    - Cron: sync product changes from shop to WMS integration
+- Order
+    - CLI: Sync all with shipment status
+- Stock
+    - Hook: update product stock on hook signals
