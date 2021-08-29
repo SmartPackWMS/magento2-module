@@ -24,3 +24,11 @@ bin/magento smartpack:product:sync
 ```
 
 _Supported product types: Simple Product_
+
+# Sync sales orders
+Sync sales order if its marked ready for shipment.
+
+```
+bin/magento smartpack:order:sync
+```
+
