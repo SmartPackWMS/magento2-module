@@ -1,6 +1,6 @@
 {
     "name": "smartpack/magento2-module",
-    "description": "WordPress SmartPack module to Magento 2 with full integration to smartpack.dk system.",
+    "description": "Mangeto2 SmartPack module with full integration to smartpack.dk system.",
     "type": "magento-module",
     "keywords": ["magento", "module"],
     "homepage": "https://github.com/SmartPackWMS/magento2-module",
