@@ -3,13 +3,19 @@
 namespace SmartPack\WMS\Api;
 
 use SmartPack\Framework\Product;
+use Magento\Framework\App\{
+    RequestInterface,
+    ResponseInterface
+};
 
 class StockChanged
 {
     function __construct(
-        \Magento\Framework\Webapi\Rest\Request $request
+        RequestInterface $request,
+        ResponseInterface $response
     ) {
         $this->request = $request;
+        $this->response = $response;
     }
 
     /**
@@ -17,7 +23,40 @@ class StockChanged
      */
     function productStockChanged()
     {
+
         $body = json_decode($this->request->getContent());
+
+        $beartoken = $this->request->getHeader('Authorization');
+
+        # Token access check
+        if (!$beartoken) {
+            $response = $this->response;
+            $response->getHeaders()->addHeaderLine('Content-Type', 'application/json');
+            $response->setStatusCode(\Magento\Framework\App\Response\Http::STATUS_CODE_403);
+            $response->setContent(json_encode([
+                'msg' => 'Beartoken access key is not valid'
+            ]));
+            $response->send();
+            die;
+        } else {
+            $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+            $scopeConfig = $objectManager->get('\Magento\Framework\App\Config\ScopeConfigInterface');
+            $storeScope = \Magento\Store\Model\ScopeInterface::SCOPE_STORES;
+
+            $beartoken = str_replace('Bearer ', '', $beartoken);
+
+            if ($scopeConfig->getValue("smartpack_wms/wms_api/wms_api_webhook_token", $storeScope) !== $beartoken) {
+                $response = $this->response;
+                $response->getHeaders()->addHeaderLine('Content-Type', 'application/json');
+                $response->setStatusCode(\Magento\Framework\App\Response\Http::STATUS_CODE_403);
+                $response->setContent(json_encode([
+                    'msg' => 'Beartoken access key is not valid'
+                ]));
+                $response->send();
+                die;
+            }
+        }
+
 
         $products = new Product();
 
