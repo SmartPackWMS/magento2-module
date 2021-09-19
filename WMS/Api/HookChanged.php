@@ -3,12 +3,13 @@
 namespace SmartPack\WMS\Api;
 
 use SmartPack\Framework\Product;
+
 use Magento\Framework\App\{
     RequestInterface,
     ResponseInterface
 };
 
-class StockChanged
+class HookChanged
 {
     function __construct(
         RequestInterface $request,
@@ -21,7 +22,7 @@ class StockChanged
     /**
      * @inheritdoc
      */
-    function productStockChanged()
+    function stockChanged()
     {
 
         $body = json_decode($this->request->getContent());
@@ -83,5 +84,15 @@ class StockChanged
         }
 
         return $changed_data;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    function orderChanged()
+    {
+        return [
+            ['msg' => 'demo']
+        ];
     }
 }

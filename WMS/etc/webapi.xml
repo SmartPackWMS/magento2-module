@@ -1,10 +1,15 @@
 <?xml version="1.0" ?>
 <routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
 	<route url="/V1/smartpack/wms/stock-hook" method="POST">
-		<service class="SmartPack\WMS\Api\StockChangedInterface" method="productStockChanged"/>
+		<service class="SmartPack\WMS\Api\HookChangedInterface" method="stockChanged"/>
 		<resources>
             <resource ref="anonymous"/>
-			<!-- <resource ref="SmartPack_WMS::StockHook" /> -->
+		</resources>
+	</route>
+    <route url="/V1/smartpack/wms/order-hook" method="POST">
+		<service class="SmartPack\WMS\Api\HookChangedInterface" method="orderChanged"/>
+		<resources>
+            <resource ref="anonymous"/>
 		</resources>
 	</route>
 </routes>
