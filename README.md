@@ -46,5 +46,6 @@ SmartPack have many functions, this module will support following integrations b
     - Cron: sync product changes from shop to WMS integration
 - Order
     - CLI: Sync all with shipment status
+    - Hook: complate order on shipment hook
 - Stock
     - Hook: update product stock on hook signals
