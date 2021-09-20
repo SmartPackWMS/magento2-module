@@ -2,8 +2,10 @@
 
 namespace SmartPack\WMS\Api;
 
+use Exception;
 use SmartPack\Framework\Product;
 
+use Magento\Sales\Model\Order;
 use Magento\Framework\App\{
     RequestInterface,
     ResponseInterface
@@ -91,8 +93,57 @@ class HookChanged
      */
     function orderChanged()
     {
+        $body = json_decode($this->request->getContent());
+
+        $beartoken = $this->request->getHeader('Authorization');
+
+        # Token access check
+        if (!$beartoken) {
+            $response = $this->response;
+            $response->getHeaders()->addHeaderLine('Content-Type', 'application/json');
+            $response->setStatusCode(\Magento\Framework\App\Response\Http::STATUS_CODE_403);
+            $response->setContent(json_encode([
+                'msg' => 'Beartoken access key is not valid'
+            ]));
+            $response->send();
+            die;
+        } else {
+            $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+            $scopeConfig = $objectManager->get('\Magento\Framework\App\Config\ScopeConfigInterface');
+            $storeScope = \Magento\Store\Model\ScopeInterface::SCOPE_STORES;
+
+            $beartoken = str_replace('Bearer ', '', $beartoken);
+
+            if ($scopeConfig->getValue("smartpack_wms/wms_api/wms_api_webhook_token", $storeScope) !== $beartoken) {
+                $response = $this->response;
+                $response->getHeaders()->addHeaderLine('Content-Type', 'application/json');
+                $response->setStatusCode(\Magento\Framework\App\Response\Http::STATUS_CODE_403);
+                $response->setContent(json_encode([
+                    'msg' => 'Beartoken access key is not valid'
+                ]));
+                $response->send();
+                die;
+            }
+        }
+
+        $changed_data = [];
+        foreach ($body as $key => $val) {
+            try {
+                $orderId = $val->id;
+                $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+                $order = $objectManager->create('\Magento\Sales\Model\Order')->load($orderId);
+                $orderState = Order::STATE_COMPLETE;
+                $order->setState($orderState)->setStatus(Order::STATE_COMPLETE);
+                $order->save();
+
+                $changed_data[$val->id] = $val->state;
+            } catch (Exception $e) {
+                $changed_data[$val->id] = null;
+            }
+        }
+
         return [
-            ['msg' => 'demo']
+            ['data' => $changed_data]
         ];
     }
 }
