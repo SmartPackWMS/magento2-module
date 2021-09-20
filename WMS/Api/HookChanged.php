@@ -129,14 +129,44 @@ class HookChanged
         $changed_data = [];
         foreach ($body as $key => $val) {
             try {
-                $orderId = $val->id;
-                $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-                $order = $objectManager->create('\Magento\Sales\Model\Order')->load($orderId);
-                $orderState = Order::STATE_COMPLETE;
-                $order->setState($orderState)->setStatus(Order::STATE_COMPLETE);
-                $order->save();
+                $state = null;
+                switch ($val->state) {
+                    case 0:
+                        // None
+                        break;
+                    case 1:
+                        // Ready For Packing
+                        break;
+                    case 2:
+                        // Items Missing
+                        break;
+                    case 3:
+                        // Error
+                        break;
+                    case 4:
+                        // Packing
+                        break;
+                    case 5:
+                        // Packed
+                        $state = Order::STATE_COMPLETE;
+                        break;
+                    case 6:
+                        // Canceled
+                        break;
+                }
 
-                $changed_data[$val->id] = $val->state;
+                if ($state) {
+                    $orderId = $val->id;
+                    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+                    $order = $objectManager->create('\Magento\Sales\Model\Order')->load($orderId);
+                    $orderState = $state;
+                    $order->setState($orderState)->setStatus($state);
+                    $order->save();
+
+                    $changed_data[$val->id] = $val->state;
+                } else {
+                    $changed_data[$val->id] = 'n/a';
+                }
             } catch (Exception $e) {
                 $changed_data[$val->id] = null;
             }
